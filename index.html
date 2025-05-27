@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Japanese Vocabulary Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Japanese Vocabulary Quiz</h1>
+
+    <!-- Chapter Selector Dropdown -->
+     <div style="margin: 20px 0;">
+    <label for="chapter-select">Select Chapter:</label>
+    <select id="chapter-select">
+      <option value="">--Select a Chapter--</option>
+      <option value="1">Ch 1</option>
+      <option value="2">Ch 2</option>
+      <option value="3">Ch 3</option>
+      <option value="4">Ch 4</option>
+      <option value="5">Ch 5</option>
+      <option value="6">Ch 6</option>
+      <option value="7">Ch 7</option>
+      <option value="8">Ch 8</option>
+      <option value="9">Ch 9</option>
+      <option value="10">Ch 10</option>
+      <option value="11">Ch 11</option>
+      <option value="12">Ch 12</option>
+      <option value="13">Ch 13</option>
+      <option value="14">Ch 14</option>
+      <option value="15">Ch 15</option>
+      <option value="16">Ch 16</option>
+      <option value="17">Ch 17</option>
+      <option value="18">Ch 18</option>
+      <option value="19">Ch 19</option>
+      <option value="20">Ch 20</option>
+      <option value="21">Ch 21</option>
+      <option value="22">Ch 22</option>
+      <option value="23">Ch 23</option>
+      <option value="24">Ch 24</option>
+      <option value="25">Ch 25</option>
+    </select>
+</div>
+    <!-- Scoreboard with question number and score -->
+    <div class="scoreboard">
+      <span id="question-number">Question 1</span>
+      <span id="score">Score: 0</span>
+    </div>
+
+    <!-- Timer display -->
+    <div id="timer">Time Left: <span id="time">30</span>s</div>
+
+    <!-- Quiz Box -->
+    <div id="quiz-box">
+      <div id="question">Loading...</div>
+      <div id="options"></div>
+      <button id="next-btn" disabled>Next</button>
+      <button id="review-btn" style="display:none;">Review Wrong Answers</button>
+      <button onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-screen" style="display: none;">
+      <h2>Quiz Over!</h2>
+      <p id="final-score">You scored X out of Y.</p>
+      <button id="restart-btn-result">Restart Quiz</button>
+    </div>
+
+    <!-- Add Vocabulary Form -->
+    <h2>Add New Word</h2>
+    <form id="add-word-form">
+      <input type="text" id="japanese-word" placeholder="Japanese word" required />
+      <input type="text" id="english-meaning" placeholder="English meaning" required />
+      <button type="submit">Add</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
