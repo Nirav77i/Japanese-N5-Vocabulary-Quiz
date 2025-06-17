@@ -1,3 +1,11 @@
+let quizMode = 'ja-en';
+
+document.getElementById('mode-select').addEventListener('change', function () {
+  quizMode = this.value;
+  restartQuiz(); // restart with new mode
+});
+
+
 // Quiz state variables
 let vocabulary = [];
 let currentQuestion = {};
@@ -62,13 +70,13 @@ document.getElementById('chapter-select').addEventListener('change', function() 
 });
 
 // Show a question or end quiz if done
+
 function showQuestion() {
   clearInterval(timerInterval);
   timeLeft = 30;
   document.getElementById('time').textContent = timeLeft;
 
   if (currentQuestionIndex >= vocabulary.length) {
-    // Quiz finished
     endQuiz();
     return;
   }
@@ -78,7 +86,8 @@ function showQuestion() {
   questionCount++;
   document.getElementById('question-number').textContent = `Question ${questionCount}`;
 
-  const correctAnswer = currentQuestion.english;
+  const correctAnswer = quizMode === 'ja-en' ? currentQuestion.english : currentQuestion.japanese;
+  const displayedQuestion = quizMode === 'ja-en' ? currentQuestion.japanese : currentQuestion.english;
 
   let wrongOptions = [];
   let usedAnswers = new Set();
@@ -87,16 +96,17 @@ function showQuestion() {
   while (wrongOptions.length < 3) {
     const randomIndex = Math.floor(Math.random() * vocabulary.length);
     const candidate = vocabulary[randomIndex];
-    if (!usedAnswers.has(candidate.english)) {
-      wrongOptions.push(candidate.english);
-      usedAnswers.add(candidate.english);
+    const candidateValue = quizMode === 'ja-en' ? candidate.english : candidate.japanese;
+    if (!usedAnswers.has(candidateValue)) {
+      wrongOptions.push(candidateValue);
+      usedAnswers.add(candidateValue);
     }
   }
 
   options = [...wrongOptions, correctAnswer];
   options = options.sort(() => 0.5 - Math.random());
 
-  document.getElementById('question').textContent = currentQuestion.japanese;
+  document.getElementById('question').textContent = displayedQuestion;
   const optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
 
@@ -118,9 +128,10 @@ function showQuestion() {
   startTimer();
 }
 
+
 // Check the selected answer for correctness
 function checkAnswer(selected) {
-  const correct = currentQuestion.english;
+  const correct = quizMode === 'ja-en' ? currentQuestion.english : currentQuestion.japanese;
   const optionsDivs = document.querySelectorAll('.option');
 
   optionsDivs.forEach(div => {
